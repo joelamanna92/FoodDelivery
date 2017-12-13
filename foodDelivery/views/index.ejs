@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title><%= title %></title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+          integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+            integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
+            integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="container">
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+
+    <div class="alert alert-primary" role="alert">
+        New Orders
+    </div>
+
+    <table class="table">
+        <thead class="thead-light">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Order Id</th>
+            <th scope="col">Customer Name</th>
+            <th scope="col">Shipping Address</th>
+            <th scope="col">Date</th>
+            <th scope="col">View</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% for(var i=0; i < data.length; i++) { %>
+
+        <tr>
+            <th scope="row"><%= i+1 %></th>
+            <td><%= data[i].order_id %></td>
+            <td><%= data[i].customer_name %></td>
+            <td><%= data[i].shipping_address %></td>
+            <td><%= data[i].date %></td>
+            <td><a href="/orders/<%= data[i].order_id %>" class="btn btn-primary btn-lg active" role="button">View</a></td>
+        </tr>
+
+        <% }%>
+
+        <tr>
+            <td colspan="6"><button style="display: block; width: 10em; margin: auto" class="btn btn-primary" data-toggle="modal" data-target="#addModal">Add</button></td>
+        </tr>
+
+        </tbody>
+    </table>
+
+    <!-- Modal -->
+    <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addModalLabel">Update Order</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="/orders/" method="post">
+                    <div class="modal-body">
+                        <div class="form-group row">
+                            <label for="customername" class="col-sm-3 col-form-label">Customer Name</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="customername" class="form-control" id="customername" placeholder="Jack" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="creditcardinfo" class="col-sm-3 col-form-label">Credit Card Details</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="creditcardinfo" class="form-control" id="creditcardinfo" placeholder="2332233223322332" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="shippingaddress" class="col-sm-3 col-form-label">Shipping Address</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="shippingaddress" class="form-control" id="shippingaddress" placeholder="190 Ryland Street, San Jose" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="telephonenumber" class="col-sm-3 col-form-label">Telephone Number</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="telephonenumber" class="form-control" id="telephonenumber" placeholder="298-208-2038">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="productnumber" class="col-sm-3 col-form-label">Product Number</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="productnumber" class="form-control" id="productnumber" placeholder="54">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <input type="submit" value="Add Order" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
